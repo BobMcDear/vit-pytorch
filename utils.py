@@ -141,7 +141,7 @@ class ClassTokenConcatenator(Module):
 
 class PositionEmbeddingAdder(Module):
 	"""
-	Adds learnable position embeddings to a set of tokens
+	Adds learnable parameters to tokens for position embedding
 	"""
 	def __init__(
 		self,
