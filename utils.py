@@ -170,7 +170,7 @@ class PositionEmbeddingAdder(Module):
 		Args:
 			input (Tensor): Input
 		
-		Returns (Tensor): The input, with the position embeddings added
+		Returns (Tensor): The input, with the learnable parameters added
 		"""
 		output = input+self.position_embedding
 		return output
