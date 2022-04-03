@@ -131,8 +131,8 @@ class ClassTokenConcatenator(Module):
 		Args:
 			input (Tensor): Input
 		
-		Returns (Tensor): The input, with the class token concatenated to its
-		second axis
+		Returns (Tensor): The input, with the class token concatenated to
+		it
 		"""
 		class_token = self.class_token.expand(len(input), 1, -1)
 		output = cat((input, class_token), dim=1)
