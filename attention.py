@@ -147,7 +147,7 @@ class MultiHeadSelfAttention(Module):
 			values=values,
 			)
 
-		attention = attention.reshape(
+		attention = attention.transpose(1, 2).reshape(
 			batch_size,
 			n_tokens,
 			self.concatenated_heads_dim,
