@@ -1,3 +1,5 @@
+<i>This is not a fork of somebody else's code. I, [@BobMcDear](https://github.com/BobMcDear), am the original creator of this project but due to problems with Git was forced to delete and restore it. In other words, [mehdi-mirzapour/PyTorch-Vision-Transformer](https://github.com/mehdi-mirzapour/PyTorch-Vision-Transformer) is a fork of this repository and not vice versa.</i>
+
 # PyTorch-Vision-Transformer
 ## Description
 This is an implementation of the vision transformer in PyTorch. You can find the accompanying blog [here](https://borna-ahz.medium.com/coding-the-vision-transformer-in-pytorch-part-1-birds-eye-view-1c0a79d8732e).
