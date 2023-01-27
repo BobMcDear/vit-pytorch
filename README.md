@@ -2,7 +2,7 @@
 
 # PyTorch-Vision-Transformer
 ## Description
-This is an implementation of the vision transformer in PyTorch. You can find the accompanying blog [here](https://borna-ahz.medium.com/coding-the-vision-transformer-in-pytorch-part-1-birds-eye-view-1c0a79d8732e).
+This is an implementation of the vision transformer in PyTorch.
 ## Usage
 The ```VisionTransformer``` class from ```model.py``` is very flexible and can be utilized for fetching vision transformers of various settings. Arguments
 that are to be passed are the token dimension, patch size, image size, depth of transformer, dimension of query/key/value vectors,
