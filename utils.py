@@ -36,7 +36,7 @@ class MultilayerPerceptron(Module):
 			out_features=out_dim,
 			)
 		self.dropout_2 = Dropout(p=dropout_p)
-	
+
 	def forward(
 		self,
 		input: Tensor,
@@ -117,9 +117,7 @@ class ClassTokenConcatenator(Module):
 		"""
 		super().__init__()
 
-		class_token = zeros(token_dim)
-		self.class_token = Parameter(class_token)
-	
+		self.class_token = Parameter(zeros(token_dim))
 
 	def forward(
 		self,
@@ -135,8 +133,7 @@ class ClassTokenConcatenator(Module):
 		it
 		"""
 		class_token = self.class_token.expand(len(input), 1, -1)
-		output = cat((input, class_token), dim=1)
-		return output
+		return cat((input, class_token), dim=1)
 
 
 class PositionEmbeddingAdder(Module):
@@ -157,8 +154,7 @@ class PositionEmbeddingAdder(Module):
 		"""
 		super().__init__()
 
-		position_embedding = zeros(n_tokens, token_dim)
-		self.position_embedding = Parameter(position_embedding)
+		self.position_embedding = Parameter(zeros(n_tokens, token_dim))
 	
 	def forward(
 		self,
@@ -172,5 +168,4 @@ class PositionEmbeddingAdder(Module):
 		
 		Returns (Tensor): The input, with the learnable parameters added
 		"""
-		output = input+self.position_embedding
-		return output
+		return input+self.position_embedding
