@@ -34,7 +34,7 @@ class QueriesKeysValuesExtractor(Module):
 			out_features=queries_keys_values_dim,
 			bias=False,
 			)
-		
+
 	def forward(
 		self,
 		input: Tensor,
@@ -48,9 +48,7 @@ class QueriesKeysValuesExtractor(Module):
 		Returns (Tuple[Tensor, Tensor, Tensor]): Queries, keys, and values
 		"""
 		batch_size, n_tokens, token_dim = input.shape
-
 		queries_keys_values = self.input_to_queries_keys_values(input)
-
 		queries_keys_values = queries_keys_values.reshape(
 			batch_size,
 			3,
@@ -58,9 +56,7 @@ class QueriesKeysValuesExtractor(Module):
 			n_tokens,
 			self.head_dim,
 			)
-
-		queries, keys, values = queries_keys_values.unbind(dim=1)
-		return queries, keys, values
+		return queries_keys_values.unbind(dim=1)
 
 
 def get_attention(
@@ -82,9 +78,7 @@ def get_attention(
 	scale = queries.shape[-1] ** -0.5
 	attention_scores = (queries @ keys.transpose(-2, -1)) * scale
 	attention_probabilities = softmax(attention_scores, dim=-1)
-
-	attention = attention_probabilities @ values
-	return attention
+	return attention_probabilities @ values
 
 
 class MultiHeadSelfAttention(Module):
@@ -120,11 +114,11 @@ class MultiHeadSelfAttention(Module):
 			in_features=self.concatenated_heads_dim,
 			out_features=token_dim,
 			)
-		
+
 		self.output_dropout = Dropout(
 			p=dropout_p,
 			)
-	
+
 	def forward(
 		self,
 		input: Tensor,
@@ -140,19 +134,16 @@ class MultiHeadSelfAttention(Module):
 		batch_size, n_tokens, token_dim = input.shape
 
 		queries, keys, values = self.query_keys_values_extractor(input)
-
 		attention = get_attention(
 			queries=queries,
 			keys=keys,
 			values=values,
 			)
-
-		attention = attention.transpose(1, 2).reshape(
+		
+		output = attention.transpose(1, 2).reshape(
 			batch_size,
 			n_tokens,
 			self.concatenated_heads_dim,
 			)
-
-		output = self.attention_to_output(attention)
-		output = self.output_dropout(output)
-		return output
+		output = self.attention_to_output(output)
+		return self.output_dropout(output)
