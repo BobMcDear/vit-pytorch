@@ -45,7 +45,7 @@ class TransformerBlock(Module):
 			n_heads=multihead_attention_n_heads,
 			dropout_p=dropout_p,
 			)
-		
+
 		self.layer_norm_2 = LayerNorm(
 			normalized_shape=token_dim,
 			)
@@ -55,7 +55,7 @@ class TransformerBlock(Module):
 			out_dim=token_dim,
 			dropout_p=dropout_p,
 			)
-	
+
 	def forward(
 		self,
 		input: Tensor,
@@ -121,14 +121,12 @@ class Transformer(Module):
 				multilayer_perceptron_hidden_dim=multilayer_perceptron_hidden_dim,
 				dropout_p=dropout_p,
 				)
-
 			transformer_block = (f'transformer_block_{i}', transformer_block)
-
 			transformer_blocks.append(transformer_block)
-		
+
 		transformer_blocks = OrderedDict(transformer_blocks)
 		self.transformer_blocks = Sequential(transformer_blocks)
-	
+
 	def forward(
 		self,
 		input: Tensor,
